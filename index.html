@@ -8,18 +8,53 @@
     <link rel="stylesheet" href="./style.css">
     <script src="./script.js"></script>
 </head>
-<body>
-    <h1>Hallo Welt!</h1>
-
-    <div class="card">
-        <div class="card-body">
-          This is some text within a card body.
+<body onload="init()">
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">QuizApp</span>
         </div>
-    </div>
-
-    <button class="btn btn-primary">Action!</button>
-
-    das ist ein <a href="#">Link!</a>
-    
+      </nav>
+    <div class="main-container">
+        <div class="card quiz-card">
+            <img id="img-quiz" src="./img/education.jpg" class="card-img-top">
+            <div id="question-answer-card" class="card-body">
+              <h5 id="quiz-question" class="card-title">Frage</h5>
+              <div class="card quiz-answer mb-2">
+                <div id="answer_1" class="card-body" onclick="checkAnswer('answer_1')">
+                  Antwort
+                </div>
+              </div>
+              <div class="card quiz-answer mb-2">
+                <div id="answer_2" class="card-body" onclick="checkAnswer('answer_2')">
+                  Antwort
+                </div>
+              </div>
+              <div class="card quiz-answer mb-2">
+                <div id="answer_3" class="card-body" onclick="checkAnswer('answer_3')">
+                  Antwort
+                </div>
+              </div>
+              <div class="card quiz-answer mb-2">
+                <div id="answer_4" class="card-body" onclick="checkAnswer('answer_4')">
+                  Antwort
+                </div>
+              </div>
+              <div class="question-footer">
+                <span>
+                <b id="current-question">1</b> von <b id="total-questions">5</b> Fragen
+                </span>
+                <button id="btn-next-question" class="btn btn-primary" onclick="nextQuestion()">Nächste Frage</button>
+                <button id="btn-show-result" class="btn btn-primary hidden" onclick="showResult()">Ergebnis</button>
+              </div>
+            </div>
+            <div id="result-card" class="card-body hidden">
+                <h5 class="card-title">Dein Ergebnis</h5>
+                <h6 id="result-value" class="card-subtitle mb-2"></h6>
+                <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                    <div id="result-progress" class="progress-bar progress-bar-striped progress-bar-animated" style="width: 10%"></div>
+                </div>
+            </div>
+          </div>
+    </div>   
 </body>
 </html>
