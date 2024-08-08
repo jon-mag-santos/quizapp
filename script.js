@@ -87,7 +87,7 @@ function showQuestion() {
 }
 
 function checkAnswer(answer) {
-    if(answer.includes(questions[currentQuestion].right_answer)){
+    if(rightAnswer(answer)){
         document.getElementById(answer).classList.add("bg-success-subtle");
         AUDIO_SUCCESS.play();
         correctAnswer++; 
@@ -106,11 +106,19 @@ function checkAnswer(answer) {
         }
     }
 
-    if(currentQuestion + 1 < questions.length){
+    if(thereIsNextQuestion()){
         document.getElementById("btn-next-question").disabled = false;
     }else {
         document.getElementById("btn-show-result").classList.remove("hidden");
     }
+}
+
+function rightAnswer(answer){
+    return answer.includes(questions[currentQuestion].right_answer);
+}
+
+function thereIsNextQuestion() {
+    return currentQuestion + 1 < questions.length;
 }
 
 function resetAnswers() {
@@ -128,7 +136,7 @@ function resetAnswers() {
 function nextQuestion() {
     resetAnswers();
 
-    if(currentQuestion < questions.length){
+    if(thereIsNextQuestion()){
         currentQuestion = currentQuestion + 1;
         showQuestion();
     }   
