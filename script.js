@@ -65,6 +65,8 @@ let questions = [
 
 let currentQuestion = 0;
 let correctAnswer = 0;
+let AUDIO_SUCCESS = new Audio('./audio/success.mp3');
+let AUDIO_FAILURE = new Audio('./audio/failure.mp3');
 
 function init() {
     document.getElementById("total-questions").innerHTML = questions.length;
@@ -87,11 +89,13 @@ function showQuestion() {
 function checkAnswer(answer) {
     if(answer.includes(questions[currentQuestion].right_answer)){
         document.getElementById(answer).classList.add("bg-success-subtle");
+        AUDIO_SUCCESS.play();
+        correctAnswer++; 
         for (let index = 1; index <= 4; index++) {
             document.getElementById("answer_"+ index).onclick = "";
         }
-        correctAnswer++; 
     }else{
+        AUDIO_FAILURE.play();
         for (let index = 1; index <= 4; index++) {
             if(("answer_"+ index).includes(questions[currentQuestion].right_answer)){
                 document.getElementById("answer_"+ index).classList.add("bg-success-subtle"); 
@@ -140,4 +144,15 @@ function showResult() {
     document.getElementById("result-value").innerHTML = `${correctAnswer} von ${questions.length} Fragen (${result}%)`;
 
     document.getElementById("result-progress").style.width = `${result}%`;
+}
+
+function restartQuiz() {
+    document.getElementById("question-answer-card").classList.remove("hidden");
+    document.getElementById("result-card").classList.add("hidden");
+    document.getElementById("btn-show-result").classList.add("hidden");
+    document.getElementById("img-quiz").src = "./img/education.jpg";
+    resetAnswers();
+    currentQuestion = 0;
+    correctAnswer = 0;
+    showQuestion();
 }
